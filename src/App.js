@@ -1,22 +1,32 @@
-import logo from './logo.svg';
+import logo from './logoloja.png';
 import './App.css';
+
+import {lazy, Suspense} from 'react';
+
+const Slogan = lazy(() => import('./slogan'));
+const Rodape = lazy(() => import('./rodape'));
+const Menu =lazy(() => import('./menu'));
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        
+        <Suspense fallback={<p>Carregando...</p> }>
+          <Menu />
+        </Suspense>
+        
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
+        <Suspense fallback={<p>Carregando...</p> }>
+          <Slogan />
+        </Suspense>
+
+        <Suspense fallback={<p>Carregando...</p> }>
+          <Rodape />
+        </Suspense>
+        
+        
       </header>
     </div>
   );
